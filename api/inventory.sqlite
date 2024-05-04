@@ -1,0 +1,101 @@
+CREATE TABLE Products (
+  ProductId INTEGER PRIMARY KEY,
+  Name VARCHAR(255),
+  Description TEXT,
+  Category VARCHAR(255),
+  Price DECIMAL(10,2),
+  StockQuantity INTEGER
+);
+
+CREATE TABLE Supplier (
+  SupplierId INTEGER PRIMARY KEY,
+  Name VARCHAR(255),
+  Phone VARCHAR(255),
+  Email VARCHAR(255)
+);
+
+CREATE TABLE Warehouse (
+  WarehouseId INTEGER PRIMARY KEY,
+  Name VARCHAR(255),
+  Location VARCHAR(255),
+  Capacity INTEGER
+);
+
+CREATE TABLE Inventory (
+  InventoryId INTEGER PRIMARY KEY,
+  SupplierId INTEGER,
+  ProductId INTEGER,
+  WarehouseId INTEGER,
+  Quantity INTEGER,
+  FOREIGN KEY(SupplierId) REFERENCES Supplier(SupplierId),
+  FOREIGN KEY(ProductId) REFERENCES Products(ProductId),
+  FOREIGN KEY(WarehouseId) REFERENCES Warehouse(WarehouseId)
+);
+
+CREATE TABLE Orders (
+  OrderId INTEGER PRIMARY KEY,
+  CustomerId INTEGER UNIQUE,
+  OrderDate DATE,
+  TotalAmount DECIMAL(10,2)
+);
+
+CREATE TABLE OrderDetail (
+  OrderDetailId INTEGER PRIMARY KEY,
+  OrderId INTEGER,
+  ProductId INTEGER,
+  Quantity INTEGER,
+  Price DECIMAL(10,2),
+  FOREIGN KEY(OrderId) REFERENCES Orders(OrderId),
+  FOREIGN KEY(ProductId) REFERENCES Products(ProductId)
+);
+
+CREATE TABLE Customer (
+  CustomerId INTEGER PRIMARY KEY,
+  Name VARCHAR(255),
+  Address VARCHAR(255),
+  Email VARCHAR(255),
+  Phone VARCHAR(255)
+);
+
+CREATE TABLE Employees (
+  EmployeeId INTEGER PRIMARY KEY,
+  Name VARCHAR(255),
+  Position VARCHAR(255),
+  WarehouseId INTEGER,
+  FOREIGN KEY(WarehouseId) REFERENCES Warehouse(WarehouseId)
+);
+
+CREATE TABLE Shipments (
+  ShipmentId INTEGER PRIMARY KEY,
+  WarehouseId INTEGER,
+  ShipmentDate DATE,
+  ArrivalDate DATE,
+  FOREIGN KEY(WarehouseId) REFERENCES Warehouse(WarehouseId)
+);
+
+CREATE TABLE ShipmentDetails (
+  ShipmentDetailId INTEGER PRIMARY KEY,
+  ShipmentId INTEGER,
+  ProductId INTEGER,
+  Quantity INTEGER,
+  FOREIGN KEY(ShipmentId) REFERENCES Shipments(ShipmentId),
+  FOREIGN KEY(ProductId) REFERENCES Products(ProductId)
+);
+
+CREATE TABLE Transaction (
+  TransactionId INTEGER PRIMARY KEY,
+  Type TEXT CHECK( Type IN ('Sales', 'Return')),
+  OrderId INTEGER,
+  ShipmentId INTEGER,
+  TransactionDate DATETIME,
+  FOREIGN KEY(OrderId) REFERENCES Orders(OrderId)
+);
+
+CREATE TABLE TransactionDetails (
+  TransactionDetailsId INTEGER PRIMARY KEY,
+  TransactionId INTEGER,
+  ProductId INTEGER,
+  Quantity INTEGER,
+  FOREIGN KEY(TransactionId) REFERENCES Transaction(TransactionId),
+  FOREIGN KEY(ProductId) REFERENCES Products(ProductId)
+);
