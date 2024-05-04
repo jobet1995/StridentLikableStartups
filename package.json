@@ -6,9 +6,12 @@
     "dev": "next dev --port 3000 --hostname 0.0.0.0",
     "build": "next build",
     "start": "next start --port 3000 --hostname 0.0.0.0",
-    "lint": "next lint"
+    "lint": "next lint",
+    "format": "prettier --write ."
   },
   "dependencies": {
+    "@supabase/postgrest-js": "^1.15.2",
+    "@supabase/supabase-js": "^2.43.1",
     "next": "^14.1.0",
     "react": "^18.2.0",
     "react-dom": "18.2.0",
@@ -18,8 +21,19 @@
     "@types/node": "^20.11.6",
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
-    "eslint": "^8.56.0",
+    "eslint": "^8.57.0",
     "eslint-config-next": "^14.1.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "express": "^4.19.2",
+    "knex": "^3.1.0",
+    "multer": "^1.4.5-lts.1",
+    "mysql": "^2.18.1",
+    "nodemailer": "^6.9.13",
+    "playwright": "^1.43.1",
+    "prettier": "^3.2.5",
+    "sequelize": "^6.37.3",
+    "sqlite3": "^5.1.7",
     "typescript": "^5.3.3"
   }
 }
