@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import http from "../http";
-import Util from "../util";
+import util from "../util";
 
 export default function Profile(props) {
   const [userAccount, setUserAccount] = useState({});

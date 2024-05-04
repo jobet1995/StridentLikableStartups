@@ -7,7 +7,7 @@ import Route from "./router";
 export default function App() {
   const [isReady, setIsReady] = useState(false);
   const [user, setUser] = useState(null);
-  const [path, setPath] = useState(location.pathname);
+  const [path, setPath] = useState(history.location.pathname); // Use history.location.pathname instead of useLocation
 
   useEffect(() => {
     let unlisten = history.listen((location) => {

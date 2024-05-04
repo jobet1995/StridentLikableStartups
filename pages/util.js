@@ -285,4 +285,4 @@ const util = {
   },
 };
 
-export default Utils;
+export default util;
