@@ -52,6 +52,7 @@ CREATE TABLE Inventory (
   FOREIGN KEY(WarehouseId) REFERENCES Warehouse(WarehouseId)
 );
 
+
 CREATE TABLE Orders (
   OrderId INTEGER PRIMARY KEY,
   CustomerId INTEGER UNIQUE,
