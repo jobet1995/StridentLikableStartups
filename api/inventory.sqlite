@@ -1,3 +1,23 @@
+CREATE TABLE Role (
+  id INTEGER PRIMARY KEY,
+  name VARCHAR(255)
+)
+CREATE TABLE UserAccount (
+  id INTEGER PRIMARY KEY,
+  name VARCHAR(255),
+  email VARCHAR(255),
+  email VARCHAR(255),
+  password VARCHAR(255),
+  password_reset_token VARCHAR(255),
+  activate bit
+)
+
+CREATE TABLE `UserRole` (
+  `user_id` INTEGER NOT NULL,
+  `role_id` INTEGER NOT NULL,
+  PRIMARY KEY (`user_id`, `role_id`)
+);
+
 CREATE TABLE Products (
   ProductId INTEGER PRIMARY KEY,
   Name VARCHAR(255),
