@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Service from "./Service";
-import Util from "../../util";
+import util from "../../util";
 
 export default function ProductsEdit(props) {
   const [products, setProducts] = useState({});
