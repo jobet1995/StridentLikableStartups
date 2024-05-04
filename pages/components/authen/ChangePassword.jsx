@@ -1,28 +1,36 @@
 import React, { useState, useEffect } from "react";
 import Util from "../../util";
 import http from "../../http";
-import { useRouter } from "next/router";
 
-export default function ChangePassword() {
+// Changed component name to start with an uppercase letter
+export default function ChangePassword(props) {
   const [, setUser] = useState({});
   const [result, setResult] = useState({});
-  const router = useRouter();
-  const { token } = router.query;
+  let { history } = props;
 
   useEffect(() => {
-    http.get("/changePassword/" + token).catch((e) => {
+    http.get("/changePassword/" + props.match.params.token).catch((e) => {
       alert("Token not found!");
-      router.push("/login");
+      history.push("/login");
     });
-  }, [router, token]);
+  }, [history, props.match.params.token]);
 
+  // Update the state
+  function onChange(e) {
+    let data = {};
+    data[e.target.name.toLowerCase()] = e.target.value;
+    setUser(data);
+  }
+
+  // Submit the form
   function handleChangePassword(e) {
+    // Renamed this function
     e.preventDefault();
     if (!Util.validateForm()) {
       return;
     }
     http
-      .post("/changePassword/" + token)
+      .post("/changePassword/" + props.match.params.token)
       .then((response) => {
         setResult({ success: true });
       })
@@ -31,11 +39,6 @@ export default function ChangePassword() {
       });
   }
 
-  function onChange(e) {
-    let data = {};
-    data[e.target.name.toLowerCase()] = e.target.value;
-    setUser(data);
-  }
   return (
     <div className="container">
       <div className="row">

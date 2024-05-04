@@ -1,6 +1,6 @@
 import history from "./history";
 
-export default {
+const util = {
   initView(isForm) {
     setTimeout(() => this.initPage(isForm)); //waiting for the next DOM update flush
   },
@@ -284,3 +284,5 @@ export default {
     return bytes ? atob(bytes).replace(/\0/g, "") : bytes;
   },
 };
+
+export default Utils;
